@@ -1,5 +1,5 @@
-use std::time::Duration;
 use rand::Rng;
+use std::time::Duration;
 use structopt::StructOpt;
 use tokio::time::sleep;
 
@@ -11,7 +11,7 @@ struct Opt {
     address: String,
 
     #[structopt(long, env, default_value = "5")]
-	call_frequency: u64,
+    call_frequency: u64,
 }
 
 #[tokio::main]
@@ -30,9 +30,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 async fn call_address(add: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let body = reqwest::get(add)
-        .await?
-        .text()
-        .await?;
+    let body = reqwest::get(add).await?.text().await?;
     Ok(body)
 }

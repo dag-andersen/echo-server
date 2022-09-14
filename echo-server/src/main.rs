@@ -1,5 +1,5 @@
-use std::net::SocketAddr;
 use rand::Rng;
+use std::net::SocketAddr;
 use structopt::StructOpt;
 use warp::Filter;
 
@@ -22,8 +22,11 @@ async fn main() {
     // GET /hello/warp => 200 OK with body "Hello, warp!"
     let hello = warp::path!("hello" / String).map(move |name| {
         println!("client called with name: {}", name);
-        format!("Hi, {}!, From server-name: {}, Version: {}", name, server_name, version)}
-    );
+        format!(
+            "Hi, {}!, From server-name: {}, Version: {}",
+            name, server_name, version
+        )
+    });
 
     warp::serve(hello).run(address).await;
 }
