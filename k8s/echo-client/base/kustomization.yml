@@ -3,5 +3,6 @@ kind: Kustomization
 namePrefix: echo-client-
 commonLabels:
   app: echo-client
+  system: echo-system
 resources:
 - deployment.yml
