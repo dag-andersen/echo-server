@@ -21,9 +21,9 @@ async fn main() {
     println!("now listing on {}", address);
     // GET /hello/warp => 200 OK with body "Hello, warp!"
     let hello = warp::path!("hello" / String).map(move |name| {
-        println!("client called with name: {}", name);
+        println!("### I, {}, was called by a client with name: {}", &server_name, name);
         format!(
-            "Hi, {}!, From server-name: {}, Version: {}",
+            "Hi, {}!, from server-name: {}, Version: {}",
             name, server_name, version
         )
     });

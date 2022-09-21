@@ -23,7 +23,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     loop {
         match call_address(&address).await {
             Err(x) => println!("Error: {}", x),
-            Ok(s) => println!("Echo: {:?}", s),
+            Ok(s) => println!("### I, {}, called '{}' and received: {:?}", &client_name, &address, s),
         }
         sleep(Duration::from_secs(opt.call_frequency)).await;
     }

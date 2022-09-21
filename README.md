@@ -1,10 +1,10 @@
 # images
 
 ## echo-server
-`dagandersen/echo-server:v0.1.0`
+`dagandersen/echo-server:v0.1.2`
 
 ## echo-client
-`dagandersen/echo-client:v0.1.0`
+`dagandersen/echo-client:v0.1.2`
 
 # How to deploy
 
