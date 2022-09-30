@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: dpl
+  namespace: default
+spec: 
+  minReadySeconds: 5
+  replicas: 4
+  strategy:
+    type: Recreate
+  template: 
+    spec:
+      containers:
+        - name: echo-client
+          image: dagandersen/echo-client
+          resources:
+            requests: 
+              cpu: 0
+              memory: 0 
+            limits:
+              cpu: "250m" 
+              memory: "1Gi"
+          env: 
+            - name: "ADDRESS"
+              value: "http://echo-server-svc.default:3030/hello" 
+            - name: "ADDRES3"
+              value: "http://echo-server-svc:3030/hello"
+            - name: something
+            - name: something
+              valueFrom:
+                configMapKeyRef:
+                  key: something
+                  name: myapp-config
+            - name: somethin2
+              valueFrom:
+                secretKeyRef:
+                  key: something
+                  name: mysecrethej
