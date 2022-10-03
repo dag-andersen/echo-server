@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: dpl
 spec:
-  minReadySeconds: 5
+  minReadySeconds: 2
   replicas: 4
   strategy:
     type: RollingUpdate
@@ -28,3 +28,7 @@ spec:
         env:
         - name: VERSION
           value: "unknown"
+        - name: DELAY_MIN
+          value: "10"
+        - name: DELAY_RANDOM
+          value: "500"
