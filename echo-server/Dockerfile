@@ -1,4 +1,4 @@
-FROM rust:1.64.0 as build
+FROM rust:1.66.0 as build
 
 RUN apt-get update
 RUN rustup component add rustfmt

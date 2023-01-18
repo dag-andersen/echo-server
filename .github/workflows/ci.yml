@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "echo-client/src/**"
+      - "echo-server/src/**"
+      - ".github/workflows/ci.yml"
+      - "**/Cargo.toml"
+      - "**/Dockerfile"
+  push:
+    branches:
+      - main
+    paths:
+      - "echo-client/src/**"
+      - "echo-server/src/**"
+      - ".github/workflows/ci.yml"
+      - "**/Cargo.toml"
+      - "**/Dockerfile"
+
+concurrency:
+  group: "echo"
+  cancel-in-progress: true
+
+env:
+  APP-VERSION: ${{ github.run_id }}
+
+jobs:
+  client:
+    environment: stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./echo-client
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: dagandersen/echo-client:latest, dagandersen/echo-client:${{ env.APP-VERSION }}
+  
+  server:
+    environment: stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./echo-server
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: dagandersen/echo-server:latest, dagandersen/echo-server:${{ env.APP-VERSION }}
