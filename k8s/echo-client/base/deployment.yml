@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: echo-client
-        image: dagandersen/echo-client
+        image: dagandersen/echo-client:latest
         resources:
           requests:
             cpu: 0

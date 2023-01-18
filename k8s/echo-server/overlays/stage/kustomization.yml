@@ -15,7 +15,3 @@ replacements:
     - spec.template.spec.containers.0.env.0.value
     select:
       kind: Deployment
-
-images:
-- name: dagandersen/echo-server
-  newTag: "v0.1.3"

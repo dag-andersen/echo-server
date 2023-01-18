@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: echo-server
-        image: "dagandersen/echo-server"
+        image: dagandersen/echo-server:latest
         resources:
           requests:
             cpu: 0
