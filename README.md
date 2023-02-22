@@ -1,22 +1,22 @@
 # images
 
 ## echo-server
-`dagandersen/echo-server:v0.1.3`
+`dagandersen/echo-server:latest`
 
 ## echo-client
-`dagandersen/echo-client:v0.1.2`
+`dagandersen/echo-client:latest`
 
 # How to deploy
 
 ## Examples
-**echo-server** to prod:
+**echo-server**
 ```bash
-$ kustomize build k8s/echo-server/overlays/prod | kubectl apply -f -
+$ kubectl kustomize k8s/echo-server | kubectl apply -f -
 ```
 
-**echo-client** to stage:
+**echo-client**
 ```bash
-$ kustomize build k8s/echo-client/overlays/stage | kubectl apply -f -
+$ kubectl kustomize k8s/echo-client | kubectl apply -f -
 ```
 
 # How to test the server
