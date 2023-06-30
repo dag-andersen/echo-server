@@ -26,6 +26,7 @@ concurrency:
 
 env:
   APP-VERSION: ${{ github.run_id }}
+  ENV: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/master' && 'dev-' || 'prod-' }}
 
 jobs:
   client:
@@ -49,7 +50,7 @@ jobs:
           context: ./echo-client
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: dagandersen/echo-client:latest, dagandersen/echo-client:${{ env.APP-VERSION }}
+          tags: dagandersen/echo-client:latest, dagandersen/echo-client:${{ env.ENV }}-${{ env.APP-VERSION }}
   
   server:
     environment: stage
@@ -72,4 +73,4 @@ jobs:
           context: ./echo-server
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: dagandersen/echo-server:latest, dagandersen/echo-server:${{ env.APP-VERSION }}
+          tags: dagandersen/echo-server:latest, dagandersen/echo-server:${{ env.ENV }}-${{ env.APP-VERSION }}
